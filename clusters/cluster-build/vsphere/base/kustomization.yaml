@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+configurations:
+  - configuration/namereference.yaml
+
+resources:
+  - clusterdeployment.yaml
+  - klusteraddonconfig.yaml
+  - machinepool.yaml
+  - managedcluster.yaml
+  - managedclusterinfo.yaml
+  - namespace.yaml
+  - secret-install-config.yaml
+  - secret-vsphere-certs.yaml
+  - secret-vsphere-creds.yaml

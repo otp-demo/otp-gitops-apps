@@ -3,10 +3,10 @@ kind: ManagedCluster
 metadata:
   labels:
     cloud: vSphere
-    name: '{{ .Values.cluster }}'
+    name: '-cluster'
     vendor: OpenShift
     cluster.open-cluster-management.io/clusterset: all-openshift-clusters
-  name: '{{ .Values.cluster }}'
+  name: '-cluster'
   annotations:
     argocd.argoproj.io/sync-wave: "370"
 spec:

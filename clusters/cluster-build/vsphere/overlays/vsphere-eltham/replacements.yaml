@@ -1,0 +1,74 @@
+replacements:
+  - source:
+      kind: Namespace
+      # need to leave it suffixed with -cluster
+      name:  ${cluster}-cluster
+    targets:
+      - select:
+          kind: KlusterletAddonConfig 
+        fieldPaths:
+          - spec.clusterName
+          - spec.clusterNamespace
+      - select:
+          kind: MachinePool 
+        fieldPaths:
+          - spec.clusterDeploymentRef.name
+      - select:
+          kind: ClusterDeployment 
+        fieldPaths:
+          - spec.platform.vsphere.cluster
+      - select:
+          kind: ManagedCluster 
+        fieldPaths:
+          - metadata.labels.name
+      - select:
+          kind: SealedSecret 
+        fieldPaths:
+          - spec.template.metadata.namespace
+  - source:
+      kind: SealedSecret
+      name: ${cluster}-pull-secret
+    targets:
+      - select:
+          kind: ClusterDeployment
+        fieldPaths:
+         - spec.pullSecretRef.name
+  - source:
+      kind: SealedSecret
+      name: ${cluster}-vsphere-creds
+    targets:
+      - select:
+          kind: ClusterDeployment
+        fieldPaths:
+         - spec.platform.vsphere.credentialsSecretRef.name
+  - source:
+      kind: SealedSecret
+      name: ${cluster}-vsphere-certs
+    targets:
+      - select:
+          kind: ClusterDeployment
+        fieldPaths:
+         - spec.platform.vsphere.certificatesSecretRef.name
+  - source:
+      kind: SealedSecret
+      name: ${cluster}-install-config
+    targets:
+      - select:
+          kind: ClusterDeployment
+        fieldPaths:
+         - spec.provisioning.installConfigSecretRef.name
+  - source:
+      kind: SealedSecret
+      name: ${cluster}-ssh-private-key
+    targets:
+      - select:
+          kind: ClusterDeployment
+        fieldPaths:
+         - spec.provisioning.sshPrivateKeySecretRef.name
+  - source:
+      kind: Namespace 
+    targets:
+      - select:
+          kind: Namespace
+        fieldPaths:
+         - metadata.annotations.openshift\.io/display-name

@@ -1,0 +1,102 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base/
+  - ../../../base/
+
+namespace: eltham-vsphere-cluster
+namePrefix: eltham-vsphere
+
+replacements:
+  - source:
+      kind: Namespace
+      # need to leave it suffixed with -cluster
+      name:  eltham-vsphere-cluster
+    targets:
+      - select:
+          kind: KlusterletAddonConfig 
+        fieldPaths:
+          - spec.clusterName
+          - spec.clusterNamespace
+      - select:
+          kind: MachinePool 
+        fieldPaths:
+          - spec.clusterDeploymentRef.name
+      - select:
+          kind: ClusterDeployment 
+        fieldPaths:
+          - spec.platform.vsphere.cluster
+      - select:
+          kind: ManagedCluster 
+        fieldPaths:
+          - metadata.labels.name
+      - select:
+          kind: SealedSecret 
+        fieldPaths:
+          - spec.template.metadata.namespace
+  - source:
+      kind: SealedSecret
+      name: eltham-vsphere-pull-secret
+    targets:
+      - select:
+          kind: ClusterDeployment
+        fieldPaths:
+         - spec.pullSecretRef.name
+  - source:
+      kind: SealedSecret
+      name: eltham-vsphere-vsphere-creds
+    targets:
+      - select:
+          kind: ClusterDeployment
+        fieldPaths:
+         - spec.platform.vsphere.credentialsSecretRef.name
+  - source:
+      kind: SealedSecret
+      name: eltham-vsphere-vsphere-certs
+    targets:
+      - select:
+          kind: ClusterDeployment
+        fieldPaths:
+         - spec.platform.vsphere.certificatesSecretRef.name
+  - source:
+      kind: SealedSecret
+      name: eltham-vsphere-install-config
+    targets:
+      - select:
+          kind: ClusterDeployment
+        fieldPaths:
+         - spec.provisioning.installConfigSecretRef.name
+  - source:
+      kind: SealedSecret
+      name: eltham-vsphere-ssh-private-key
+    targets:
+      - select:
+          kind: ClusterDeployment
+        fieldPaths:
+         - spec.provisioning.sshPrivateKeySecretRef.name
+  - source:
+      kind: Namespace 
+    targets:
+      - select:
+          kind: Namespace
+        fieldPaths:
+         - metadata.annotations.openshift\.io/display-name
+
+patches:
+  - target: 
+      group: hive.openshift.io
+      version: v1
+      kind: MachinePool 
+    patch: |-
+      - op: replace 
+        path: /spec/platform/vsphere
+        value: 
+          cpus: 4
+          coresPerSocket:  4
+          memoryMB:  16384
+          osDisk:
+            diskSizeGB: 120
+      - op: replace 
+        path: /spec/replicas
+        value: 3

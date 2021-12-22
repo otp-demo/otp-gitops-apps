@@ -1,0 +1,13 @@
+nameReference:
+- kind: SealedSecret
+  fieldSpecs:
+  - kind: SealedSecret
+    path: spec/template/metadata/name
+
+- kind: ClusterDeployment
+  fieldSpecs:
+  - kind: ClusterDeployment
+    path: spec/platform/vsphere/cluster
+  - kind: ClusterDeployment
+    path: spec.clusterName
+    

@@ -3,8 +3,7 @@ kind: Namespace
 metadata:
   annotations:
     openshift.io/description: ""
-    openshift.io/display-name: {{ .Values.cluster }}
-  name: {{ .Values.cluster }}
-  annotations:
+    openshift.io/display-name: cluster  
     argocd.argoproj.io/sync-wave: "350"
+  name: cluster 
 

@@ -1,0 +1,29 @@
+cluster: eltham-vsphere
+type: vsphere
+imageName: img4.8.19-x86-64-appsub
+
+provider:
+    vcenter: vcenter.nmerrett.net
+    vmClusterName: HPE
+    datacenter: Homelab
+    datastore: datastore2
+    baseDomain: nmerrett.net
+masters:
+    count: 3 
+    cpus: 4
+    coresPerSocket: 2
+    memoryMB: 16384
+    diskGB: 120
+
+workers:
+    count: 3
+    cpus: 4
+    coresPerSocket: 2
+    memoryMB: 16384
+    diskGB: 120
+
+network:
+    networkName: 'VM Network'
+    apiVIP: 10.20.20.90
+    ingressVIP: 10.20.20.91
+    

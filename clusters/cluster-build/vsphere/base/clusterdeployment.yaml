@@ -1,0 +1,38 @@
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: '-cluster'
+  annotations:
+    argocd.argoproj.io/sync-wave: "360"
+  namespace: 'cluster-name'
+  labels:
+    cloud: 'vSphere'
+    vendor: OpenShift
+    hive.openshift.io/cluster-platform: vsphere
+    cluster.open-cluster-management.io/clusterset: 'all-openshift-clusters'
+spec:
+  baseDomain: base.cluster.name
+  clusterName: 'cluster-name'
+  controlPlaneConfig:
+    servingCertificates: {}
+  installAttemptsLimit: 1
+  platform:
+    vsphere:
+      cluster: -vsphere-cluster 
+      certificatesSecretRef:
+        name: -vsphere-certs
+      credentialsSecretRef:
+        name: -vsphere-creds
+      vCenter: vcenter
+      datacenter: DC1 
+      defaultDatastore: DS1
+      network: VM Network 
+  provisioning:
+    installConfigSecretRef:
+      name: -install-config
+    sshPrivateKeySecretRef:
+      name: -ssh-private-key
+    imageSetRef:
+      name: img4.8.19-x86-64-appsub
+  pullSecretRef:
+    name: -pull-secret

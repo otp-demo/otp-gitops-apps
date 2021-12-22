@@ -1,13 +1,13 @@
 apiVersion: agent.open-cluster-management.io/v1
 kind: KlusterletAddonConfig
 metadata:
-  name: '{{ .Values.cluster }}'
+  name: -cluster 
   annotations:
     argocd.argoproj.io/sync-wave: "360"
-  namespace: '{{ .Values.cluster }}'
+  namespace: cluster 
 spec:
-  clusterName: '{{ .Values.cluster }}'
-  clusterNamespace: '{{ .Values.cluster }}'
+  clusterName: cluster
+  clusterNamespace: cluster
   clusterLabels:
     cloud: vSphere
     vendor: OpenShift

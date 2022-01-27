@@ -45,6 +45,11 @@ if [[ -z ${SVC_CIDR} ]]; then
   exit 1
 fi
 
+if [[ -z ${BASE_DOMAIN} ]]; then
+  echo "Please provide environment variable BASE_DOMAIN"
+  exit 1
+fi
+
 SEALED_SECRET_NAMESPACE=${SEALED_SECRET_NAMESPACE:-sealed-secrets}
 SEALED_SECRET_CONTROLLER_NAME=${SEALED_SECRET_CONTROLLER_NAME:-sealed-secrets}
 
@@ -62,9 +67,10 @@ ENC_SSH_PRIV=$(echo -n ${SSH_PRIV} | kubeseal --raw --name=$CLUSTER_NAME-ssh-pri
 
 echo "Updating values file with encrypted secrets"
 sed -i '' -e 's#.*cluster:.*$#cluster: '$CLUSTER_NAME'#g' values.yaml
-sed -i '' -e 's#.*region:.*$  #region: '$REGION'#g' values.yaml
-sed -i '' -e 's#.*clusterCidr:.*$  #clusterCidr: '$POD_CIDR'#g' values.yaml
-sed -i '' -e 's#.*serviceCidr:.*$  #serviceCidr: '$SVC_CIDR'#g' values.yaml
+sed -i '' -e 's#.*region:.*$#  region: '$REGION'#g' values.yaml
+sed -i '' -e 's#.*clusterCidr:.*$#  clusterCidr: '$POD_CIDR'#g' values.yaml
+sed -i '' -e 's#.*serviceCidr:.*$#  serviceCidr: '$SVC_CIDR'#g' values.yaml
+sed -i '' -e 's#.*baseDomain:.*$#  baseDomain: '$BASE_DOMAIN'#g' values.yaml
 sed -i '' -e 's#.*aws_access_key_id.*$#  aws_access_key_id: '$ENC_AWS_ID'#g' values.yaml
 sed -i '' -e 's#.*aws_secret_access_key.*$#  aws_secret_access_key: '$ENC_AWS_KEY'#g' values.yaml
 sed -i '' -e 's#.*pullSecret.*$#  pullSecret: '$ENC_PULL_SECRET'#g' values.yaml

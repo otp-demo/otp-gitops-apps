@@ -9,5 +9,6 @@ export CLUSTER_NAME="aws1"
 export REGION="ap-southeast-1"
 export POD_CIDR="10.128.0.0/14"
 export SVC_CIDR="172.30.0.0/16"
+export BASE_DOMAIN="mutihybridcloudkitchen.com"
 
 ./make_secret-aws.sh

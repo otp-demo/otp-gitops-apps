@@ -5,5 +5,5 @@ metadata:
   name: vault-channel
   namespace: vault
 spec:
-  pathname: https://github.com/otp-demo/otp-gitops-apps.git
+  pathname: https://${GIT_BASEURL}/${GIT_ORG}/otp-gitops-apps.git
   type: GitHub

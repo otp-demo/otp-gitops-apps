@@ -13,6 +13,8 @@ While a centralised secrets solution  is yet to be defined, the credentials are 
 
 
 ## Configuration
+This is for informational purposes, the clustername customisation is done automatically, when the application is deployed, a job will run, find the cluster name and create the config map
+
 Similar to the credentials, a configuration file that is cluster (maybe not always) specific needs to be also created, the configMapGenerator function of kustomize is also used to read the contents of the cwagentconfig.json and create a configmap from it.
 
 Region, this can be the same for all, but does not have to be.

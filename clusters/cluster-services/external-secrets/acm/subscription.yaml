@@ -6,7 +6,7 @@ metadata:
   labels:
     app: external-secrets
   annotations:
-      apps.open-cluster-management.io/git-branch: master
+      apps.open-cluster-management.io/git-branch: ${GIT_GITOPS_BRANCH} 
       apps.open-cluster-management.io/git-path: clusters/cluster-services/external-secrets/manifests/ 
       apps.open-cluster-management.io/reconcile-option: replace
 spec:

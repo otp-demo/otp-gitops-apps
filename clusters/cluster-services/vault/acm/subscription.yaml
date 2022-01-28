@@ -6,7 +6,7 @@ metadata:
   labels:
     app: vault
   annotations:
-      apps.open-cluster-management.io/git-branch: master
+      apps.open-cluster-management.io/git-branch: ${GIT_GITOPS_BRANCH} 
       apps.open-cluster-management.io/git-path: clusters/cluster-services/vault/helm/ 
       apps.open-cluster-management.io/reconcile-option: replace
 spec:

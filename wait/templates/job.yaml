@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wait-job-{{ uuidv4 | trunc 5 | trimSuffix "-" }}
+  namespace: sync-wave-demo
+spec:
+  template:
+    spec:
+      containers:
+        - name: wait
+          image: quay.io/congxdev/wait:0.1
+          imagePullPolicy: Always
+      restartPolicy: Never
+  backoffLimit: 2

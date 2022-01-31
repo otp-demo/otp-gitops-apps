@@ -2,13 +2,13 @@
 #
 # Requires:
 #  Openshift-GitOps operator be installed in the project "openshift-gitops"
-#  Placement resource "all-openshift-clusters" exists
+#  Placement resource "last-mile-gitops" exists
 #  A clusterSet is bound to the openshift-gitops namespace 
 ---
 apiVersion: apps.open-cluster-management.io/v1beta1
 kind: GitOpsCluster
 metadata:
-  name: openshift-gitops-rhacm-gitopscluster
+  name: rhacm-gitopscluster
   namespace: openshift-gitops
 spec:
   argoServer:
@@ -17,5 +17,5 @@ spec:
   placementRef:
     kind: Placement
     apiVersion: cluster.open-cluster-management.io/v1alpha1
-    name: all-openshift-clusters
+    name: last-mile-gitops 
     namespace: openshift-gitops

@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-global-zone-aws
+  namespace: openshift-gitops
+spec:
+  template:
+    spec:
+      containers:
+        - name: create-global-zone-aws
+          image: quay.io/congxdev/okd48cli-awscli:latest
+          imagePullPolicy: Always
+          env:
+            - name: managedClusterName
+              value: {{ .Values.awsCluster }}
+            - name: AWS_USER
+              value: {{ .Values.AWS_USER }}
+      restartPolicy: OnFailure
+  backoffLimit: 2
+---

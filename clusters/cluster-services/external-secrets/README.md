@@ -1,6 +1,7 @@
 # External Secrets
 
-These manifests in this folder will install the External Secrets Operator.
+The manifests in this folder will install the External Secrets, unfortunately the community operator would not install correctly, and so the method used was to generate the manifests and install them directly
+ 
 External secrets provides a method to sync secrets from an external keystore, and write them to a local secret in OpenShift/Kubernetes. It will not write to the external key store, thus the secrets have to be updated outside the normal workflow of the OTP Pattern.
 
 External Secrets Supports a number of backing keystores, many can be used in parallel if need be.

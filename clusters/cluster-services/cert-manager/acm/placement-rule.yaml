@@ -13,4 +13,4 @@ spec:
     matchExpressions: []
     matchLabels:
       # Replace value with Cluster you wish to provision too.
-      name: multicloud-cluster-set
+      cluster.open-cluster-management.io/clusterset: multicloud-cluster-set

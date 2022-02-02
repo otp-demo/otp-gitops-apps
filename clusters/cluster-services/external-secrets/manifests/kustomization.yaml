@@ -1,0 +1,12 @@
+resources:
+  - deployment.yaml
+  - cr-secret-controller.yaml
+  - cr-secret-edit.yaml
+  - cr-secret-view.yaml
+  - crb-secrets-controller.yaml
+  - crd-clustersecretstore.yaml
+  - crd-externalsecrets.yaml
+  - crd-secretstore.yaml
+  - rb-secrets-leaderelection.yaml
+  - role-secrets-leaderelection.yaml
+  - serviceaccount.yaml

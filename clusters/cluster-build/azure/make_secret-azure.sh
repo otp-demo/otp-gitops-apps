@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
 
-#function parse_yaml {
-#   local prefix=$2
-#   local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
-#   sed -ne "s|^\($s\):|\1|" \
-#        -e "s|^\($s\)\($w\)$s:$s[\"']\(.*\)[\"']$s\$|\1$fs\2$fs\3|p" \
-#        -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p"  $1 |
-#   awk -F$fs '{
-#      indent = length($1)/2;
-#      vname[indent] = $2;
-#      for (i in vname) {if (i > indent) {delete vname[i]}}
-#      if (length($3) > 0) {
-#         vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
-#         printf("%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);
-#      }
-#   }'
-#}
+function parse_yaml {
+   local prefix=$2
+   local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
+   sed -ne "s|^\($s\):|\1|" \
+        -e "s|^\($s\)\($w\)$s:$s[\"']\(.*\)[\"']$s\$|\1$fs\2$fs\3|p" \
+        -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p"  $1 |
+   awk -F$fs '{
+      indent = length($1)/2;
+      vname[indent] = $2;
+      for (i in vname) {if (i > indent) {delete vname[i]}}
+      if (length($3) > 0) {
+         vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
+         printf("%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);
+      }
+   }'
+}
 
 # Set variables
 if [[ -z ${AZ_CLIENT_KEY} ]]; then
@@ -62,7 +62,7 @@ SEALED_SECRET_NAMESPACE=${SEALED_SECRET_NAMESPACE:-sealed-secrets}
 SEALED_SECRET_CONTROLLER_NAME=${SEALED_SECRET_CONTROLLER_NAME:-sealed-secrets}
 
 #extract values from values.yaml
-#eval $(parse_yaml values.yaml "VALUES_")
+eval $(parse_yaml values.yaml "VALUES_")
 
 #form the data strucutre containing all the different ids
 AZ_ID='{"clientId": "'$AZ_CLIENT_ID'", "clientSecret": "'$AZ_CLIENT_KEY'", "tenantId": "'$AZ_TEN_ID'", "subscriptionId": "'$AZ_SUB_ID'"}'

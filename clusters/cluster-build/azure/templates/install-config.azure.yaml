@@ -5,7 +5,7 @@ baseDomain: {{ .Values.provider.baseDomain }}
 controlPlane:
   hyperthreading: Enabled
   name: master
-  replicas: 3
+  replicas: {{ .Values.masters.count }}
   platform:
     azure:
       osDisk:
@@ -14,7 +14,7 @@ controlPlane:
 compute:
 - hyperthreading: Enabled
   name: 'worker'
-  replicas: 3
+  replicas: {{ .Values.workers.count }}
   platform:
     azure:
       type:  {{ .Values.workers.machineType }}

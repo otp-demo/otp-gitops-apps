@@ -6,14 +6,13 @@ metadata:
     argocd.argoproj.io/sync-wave: "360"
   namespace: '{{ .Values.cluster }}'
   labels:
-    cloud: 'Azure'
+    cloud: 'AWS'
     region: '{{ .Values.provider.region }}'
     vendor: OpenShift
-    cluster.open-cluster-management.io/clusterset: 'all-openshift-clusters'
 spec:
-  baseDomain: {{ .Values.provider.baseDomain}} 
+  baseDomain: {{ .Values.provider.baseDomain }}
   clusterName: '{{ .Values.cluster }}'
-  powerState: Running
+  powerState: {{ .Values.powerState }}
   controlPlaneConfig:
     servingCertificates: {}
   installAttemptsLimit: 1

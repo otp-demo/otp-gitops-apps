@@ -4,6 +4,8 @@ imageName: img4.8.25-x86-64-appsub
 clusterSet:
   name: "multicloud-cluster-set"
   enabled: true
+
+powerState: Running
   
 provider:
   region: ap-southeast-1

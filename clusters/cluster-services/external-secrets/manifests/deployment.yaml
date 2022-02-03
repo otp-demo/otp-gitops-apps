@@ -6,10 +6,8 @@ metadata:
   name: external-secrets
   namespace: "default"
   labels:
-    helm.sh/chart: external-secrets-0.3.11
     app.kubernetes.io/name: external-secrets
     app.kubernetes.io/instance: external-secrets
-    app.kubernetes.io/version: "v0.3.11"
 spec:
   replicas: 1
   selector:

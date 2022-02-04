@@ -13,4 +13,4 @@ spec:
     matchExpressions: []
     matchLabels:
       # Replace value with Cluster you wish to provision too.
-      name: managed-roks-1 
+      vault-host: true 

@@ -7,6 +7,6 @@ export AZ_SUB_ID="azsubid"
 export SSH_PRIV="$(cat id_ed25519)"
 export SSH_PUB="$(cat id_ed25519.pub)"
 export PULL_SECRET=$(cat pullsecret)
-export CLUSTER_NAME="azure0"
+export CLUSTER_NAME="azure1"
 
 ./make_secret-azure.sh

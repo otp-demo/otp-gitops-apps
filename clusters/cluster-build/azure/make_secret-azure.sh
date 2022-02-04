@@ -79,13 +79,14 @@ ENC_INST_CFG=$(echo -n "$install_config" | kubeseal --raw --name=$VALUES_cluster
 
 # Encrypt the secret using kubeseal and private key from the cluster
 echo "Creating Secrets"
+
 ENC_AZ_ID=$(echo -n ${AZ_ID} | kubeseal --raw --name=$VALUES_cluster-azure-creds --namespace=$VALUES_cluster --controller-namespace $SEALED_SECRET_NAMESPACE --controller-name $SEALED_SECRET_CONTROLLER_NAME --from-file=/dev/stdin)
 ENC_PULL_SECRET=$(echo -n ${PULL_SECRET} | kubeseal --raw --name=$VALUES_cluster-pull-secret --namespace=$VALUES_cluster --controller-namespace $SEALED_SECRET_NAMESPACE --controller-name $SEALED_SECRET_CONTROLLER_NAME --from-file=/dev/stdin)
 ENC_SSH_PRIV=$(cat ${SSH_PRIV_FILE} | kubeseal --raw --name=$VALUES_cluster-ssh-private-key --namespace=$VALUES_cluster  --controller-namespace $SEALED_SECRET_NAMESPACE --controller-name $SEALED_SECRET_CONTROLLER_NAME --from-file=/dev/stdin)
 
 #sed -i '' -e 's#.*cluster.*$#cluster: '$CLUSTER_NAME'#g' values.yaml
-sed -i '' -e 's#.*azure_creds.*$#    azure_creds: '$ENC_AZ_ID'#g' values.yaml
-sed -i '' -e 's#.*pullSecret.*$#    pullSecret: '$ENC_PULL_SECRET'#g' values.yaml
-sed -i '' -e 's#.*sshPrivatekey.*$#    sshPrivatekey: '$ENC_SSH_PRIV'#g' values.yaml
-sed -i '' -e 's#.*installConfig.*$#    installConfig: '$ENC_INST_CFG'#g' values.yaml
+sed -i '' -e 's#.*azure_creds.*$#  azure_creds: '$ENC_AZ_ID'#g' values.yaml
+sed -i '' -e 's#.*pullSecret.*$#  pullSecret: '$ENC_PULL_SECRET'#g' values.yaml
+sed -i '' -e 's#.*sshPrivatekey.*$#  sshPrivatekey: '$ENC_SSH_PRIV'#g' values.yaml
+sed -i '' -e 's#.*installConfig.*$#  installConfig: '$ENC_INST_CFG'#g' values.yaml
 

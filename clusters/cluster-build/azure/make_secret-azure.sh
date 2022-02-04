@@ -52,7 +52,7 @@ rm templates/install-config.yaml
 # Encrypt the secret using kubeseal and private key from the cluster
 echo "Creating sealed secrets"
 AZ_ID='{"clientId": "'$AZ_CLIENT_ID'", "clientSecret": "'$AZ_CLIENT_KEY'", "tenantId": "'$AZ_TEN_ID'", "subscriptionId": "'$AZ_SUB_ID'"}'
-ENC_AZ_ID=$(echo -n ${AZ_ID} | kubeseal --raw --name=$VALUES_cluster-azure-creds --namespace=$VALUES_cluster --controller-namespace $SEALED_SECRET_NAMESPACE --controller-name $SEALED_SECRET_CONTROLLER_NAME --from-file=/dev/stdin)
+ENC_AZ_ID=$(echo -n ${AZ_ID} | kubeseal --raw --name=$CLUSTER_NAME-azure-creds --namespace=$CLUSTER_NAME --controller-namespace $SEALED_SECRET_NAMESPACE --controller-name $SEALED_SECRET_CONTROLLER_NAME --from-file=/dev/stdin)
 ENC_PULL_SECRET=$(echo -n ${PULL_SECRET} | kubeseal --raw --name=$CLUSTER_NAME-pull-secret --namespace=$CLUSTER_NAME --controller-namespace $SEALED_SECRET_NAMESPACE --controller-name $SEALED_SECRET_CONTROLLER_NAME --from-file=/dev/stdin)
 ENC_SSH_PRIV=$(echo -n ${SSH_PRIV} | kubeseal --raw --name=$CLUSTER_NAME-ssh-private-key --namespace=$CLUSTER_NAME  --controller-namespace $SEALED_SECRET_NAMESPACE --controller-name $SEALED_SECRET_CONTROLLER_NAME --from-file=/dev/stdin)
 

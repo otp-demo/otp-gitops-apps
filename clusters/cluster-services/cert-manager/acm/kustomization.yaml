@@ -3,4 +3,3 @@ resources:
   - placement-rule.yaml
   - subscription.yaml
   - channel.yaml
-  - namespace.yaml

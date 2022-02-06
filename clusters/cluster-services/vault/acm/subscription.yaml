@@ -7,10 +7,11 @@ metadata:
     app: vault
   annotations:
       apps.open-cluster-management.io/git-branch: master 
-      apps.open-cluster-management.io/git-path: clusters/cluster-services/vault/helm/ 
+      apps.open-cluster-management.io/git-path: clusters/cluster-services/vault/manifests/
       apps.open-cluster-management.io/reconcile-option: replace
 spec:
   channel: vault/vault-channel
+  allow:
   placement:
     placementRef:
       kind: PlacementRule

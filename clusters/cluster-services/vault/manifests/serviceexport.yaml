@@ -1,0 +1,12 @@
+---
+# Source: vault-multicluster/charts/vault/templates/server-serviceexport.yaml
+# Service for Vault cluster
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: vault
+  namespace: vault
+  labels:
+    app.kubernetes.io/name: vault
+    app.kubernetes.io/instance: vault
+  annotations:

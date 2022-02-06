@@ -1,15 +1,15 @@
 apiVersion: hive.openshift.io/v1
 kind: SelectorSyncSet
 metadata:
-  name: vault-intermediate-ca-sync
+  name: vault-ca-sync
 spec:
   clusterDeploymentSelector:
     matchLabels:
-      cluster.open-cluster-management.io/clusterset: azure-aws-clusterset
+      cluster.open-cluster-management.io/clusterset: multicloud-cluster-set
   secretMappings:
     - sourceRef:
-        name: vault-intermediate-ca
-        namespace: vault
+        name: rootca
+        namespace: cert-manager 
       targetRef:
         name: rootca
-        namespace: vault 
+        namespace: vault

@@ -13,4 +13,5 @@ spec:
     matchExpressions: []
     matchLabels:
       # Replace value with Cluster you wish to provision too.
-      vault-host: true 
+      cluster.open-cluster-management.io/clusterset: multicloud-cluster-set
+

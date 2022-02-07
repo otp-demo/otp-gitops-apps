@@ -45,7 +45,10 @@ patches:
       - op: replace 
         path: /spec/dnsNames
         value: 
-          - vault.global.mutihyrbridcloudkitchen.com
+          - vault.apps.aws0.mutihybridcloudkitchen.com
+          - vault.apps.aws1.mutihybridcloudkitchen.com
+          - vault.apps.azure0.azure01.ibmdojo01.com
+          - vault.swinney.io
   - target:
       kind: Certificate 
       name: vault-tls

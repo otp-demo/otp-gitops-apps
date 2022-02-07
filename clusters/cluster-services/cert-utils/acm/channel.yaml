@@ -1,0 +1,9 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: cert-utils-channel
+  namespace: cert-utils 
+spec:
+  pathname: https://github.com/otp-demp/otp-gitops-apps.git
+  type: GitHub

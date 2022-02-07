@@ -11,7 +11,10 @@ spec:
   usages:
     - server auth
   dnsNames:
-  - vault.global.ibmsbaasonaws.com
+  - vault.apps.aws0.mutihybridcloudkitchen.com
+  - vault.apps.aws1.mutihybridcloudkitchen.com
+  - vault.apps.azure0.azure01.ibmdojo01.com
+  - vault.swinney.io
   issuerRef:
     name: vault-issuer
     # We can reference ClusterIssuers by changing the kind here.

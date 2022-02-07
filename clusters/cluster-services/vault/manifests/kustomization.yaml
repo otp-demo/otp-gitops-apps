@@ -33,11 +33,11 @@ resources:
 patches:
   - target:
       kind: Route 
-      name: vault-ui
+      name: vault-global
     patch: |-
       - op: replace 
         path: /spec/host
-        value: vault.global.mutihyrbridcloudkitchen.com
+        value: vault.swinney.io
   - target:
       kind: Certificate 
       name: vault-route

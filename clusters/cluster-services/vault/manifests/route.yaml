@@ -3,16 +3,30 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: vault-ui
+  name: vault
   annotations:
     cert-utils-operator.redhat-cop.io/destinationCA-from-secret: vault-tls
     cert-utils-operator.redhat-cop.io/certs-from-secret: vault-route-tls
-    global-load-balancer-operator.redhat-cop.io/load-balancing-policy: Latency
-    global-load-balancer-operator.redhat-cop.io/health-check: '{"httpGet":{"path":"/ui/","port":443,"scheme":"HTTPS"},"timeoutSeconds":1,"periodSeconds":30,"successThreshold":1,"failureThreshold":3}'
-  labels:
-    route-type: global
+  spec:
+    port:
+    targetPort: https
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: reencrypt
+  to:
+    kind: Service
+    name: vault-ui
+---
+# Source: vault-multicluster/templates/route.yaml
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: vault-global
+  annotations:
+    cert-utils-operator.redhat-cop.io/destinationCA-from-secret: vault-tls
+    cert-utils-operator.redhat-cop.io/certs-from-secret: vault-route-tls
 spec:
-  host: vault.global.ibmsbaasonaws.com
+  host: vault.swinney.io
   port:
     targetPort: https
   tls:

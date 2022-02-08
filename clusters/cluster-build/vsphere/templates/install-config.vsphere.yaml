@@ -36,7 +36,6 @@ platform:
     ingressVIP: {{ .Values.network.ingressVIP }}
     network: {{ .Values.network.networkName }}
 
-publish: Externnal
 networking:
   clusterNetwork:
   - cidr: {{ .Values.network.clusterCidr }} 

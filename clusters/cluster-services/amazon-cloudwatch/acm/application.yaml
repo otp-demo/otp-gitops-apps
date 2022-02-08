@@ -1,7 +1,7 @@
 apiVersion: app.k8s.io/v1beta1
 kind: Application
 metadata:
-  name: amazon-cloudwatch
+  name: amazon-cloudwatch-cluster-service
   namespace: amazon-cloudwatch
 spec:
   componentKinds:

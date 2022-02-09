@@ -17,7 +17,7 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/template/spec/containers/0/image
-        value: amazon/cloudwatch-agent:latest
+        value: quay.io/nickmerrett/cloudwatch-agent:latest
     target:
       kind: Deployment
       name: cwagent-prometheus

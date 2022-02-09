@@ -17,7 +17,7 @@ spec:
       containers:
         - name: cloudwatch-agent
           image: amazon/cloudwatch-agent:1.247348.0b251302
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent 
           resources:
             limits:
               cpu:  1000m

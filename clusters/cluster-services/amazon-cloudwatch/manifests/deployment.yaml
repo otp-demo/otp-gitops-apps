@@ -29,22 +29,14 @@ spec:
           env:
             - name: CI_VERSION
               value: "k8s/1.3.8"
-            - name: AWS_KEY_KEY_ID
-              valueFrom:
-                secretKeyRef:
-                  key: ACCESS_ID
-                  name: awscreds
-            - name: AWS_SECRET_ACCESS_KEY
-              valueFrom:
-                secretKeyRef:
-                  key: ACCESS_KEY
-                  name: awscreds
           # Please don't change the mountPath
           volumeMounts:
             - name: prometheus-cwagentconfig
               mountPath: /etc/cwagentconfig
             - name: prometheus-config
               mountPath: /etc/prometheusconfig
+            - name: awscreds
+              mountPath: /root/.aws/
       volumes:
         - name: prometheus-cwagentconfig
           configMap:
@@ -52,5 +44,8 @@ spec:
         - name: prometheus-config
           configMap:
             name: prometheus-config
+        - name: awscreds
+          secret:
+            secretName: awscreds
       terminationGracePeriodSeconds: 60
       serviceAccountName: cwagent-prometheus

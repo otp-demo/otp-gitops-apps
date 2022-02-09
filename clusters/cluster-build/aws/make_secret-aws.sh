@@ -46,9 +46,9 @@ ENC_PULL_SECRET=$(echo -n ${PULL_SECRET} | kubeseal --raw --name=$CLUSTER_NAME-p
 ENC_SSH_PRIV=$(echo -n ${SSH_PRIV} | kubeseal --raw --name=$CLUSTER_NAME-ssh-private-key --namespace=$CLUSTER_NAME  --controller-namespace $SEALED_SECRET_NAMESPACE --controller-name $SEALED_SECRET_CONTROLLER_NAME --from-file=/dev/stdin)
 
 echo "Updating values file with encrypted secrets"
-sed -i '' -e 's#.*cluster.*$#cluster: '$CLUSTER_NAME'#g' values.yaml
-sed -i '' -e 's#.*aws_access_key_id.*$#    aws_access_key_id: '$ENC_AWS_ID'#g' values.yaml
-sed -i '' -e 's#.*aws_secret_access_key.*$#    aws_secret_access_key: '$ENC_AWS_KEY'#g' values.yaml
-sed -i '' -e 's#.*pullSecret.*$#    pullSecret: '$ENC_PULL_SECRET'#g' values.yaml
-sed -i '' -e 's#.*sshPrivatekey.*$#    sshPrivatekey: '$ENC_SSH_PRIV'#g' values.yaml
-sed -i '' -e 's#.*installConfig.*$#    installConfig: '$ENC_INST_CFG'#g' values.yaml
+sed -i '' -e 's#.*cluster:.*$#cluster: '$CLUSTER_NAME'#g' values.yaml
+sed -i '' -e 's#.*aws_access_key_id.*$#  aws_access_key_id: '$ENC_AWS_ID'#g' values.yaml
+sed -i '' -e 's#.*aws_secret_access_key.*$#  aws_secret_access_key: '$ENC_AWS_KEY'#g' values.yaml
+sed -i '' -e 's#.*pullSecret.*$#  pullSecret: '$ENC_PULL_SECRET'#g' values.yaml
+sed -i '' -e 's#.*sshPrivatekey.*$#  sshPrivatekey: '$ENC_SSH_PRIV'#g' values.yaml
+sed -i '' -e 's#.*installConfig.*$#  installConfig: '$ENC_INST_CFG'#g' values.yaml

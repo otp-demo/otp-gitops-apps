@@ -1,19 +1,26 @@
 # Amazon CloudWatch Agent
 ## Introduction
-This Amazon Cloud Watch instance deploys the amazon cloudwatch agent, which has been configuired to scrape metrics from the built in prometheus instance of the OCP cluster and ship them to Amazon CloudWatch.
+This Amazon Cloud Watch instance deploys the amazon cloudwatch agent, which has been configured to scrape metrics from the built in prometheus instance of the OCP cluster and ship them to Amazon CloudWatch.
 
 ## Credentials
 AWS credentials are needed for the logs to appear in the correct account.
 
-Currently these credentials are added to a secret at runtime by kustomize. The agent (in the container) expects them to be in a file with a particualr format. The "credentials" file in each overlay is used by the kustomize secretGenerator function to create the final secret that is applied to OCP.
+The way it has been configured is to pull the credentials file (example below) from the vault, stored under the path secrets/awscreds. The pulling is done be the external secrets operator which is preconfigured. 
 
-While a centralised secrets solution  is yet to be defined, the credentials are being created locally per cluster. 
+Example credentials file
+```
+[AmazonCloudWatchAgent]
+aws_access_key_id=
+aws_secret_access_key=
+```
 
-**DO NOT COMMIT THE CREDENTIALS FILE TO GIT**
+The corresponding IAM policy in AWS is CloudWatchAgentServerPolicy it needs to be applied to the profile that the credentials belong too.
+
+**DO NOT COMMIT CREDENTIALS GIT**
 
 
 ## Configuration
-This is for informational purposes, the clustername customisation is done automatically, when the application is deployed, a job will run, find the cluster name and create the config map
+This is for informational purposes, the clustername customization is done automatically, when the application is deployed, a job will run, find the cluster name and create the config map
 
 Similar to the credentials, a configuration file that is cluster (maybe not always) specific needs to be also created, the configMapGenerator function of kustomize is also used to read the contents of the cwagentconfig.json and create a configmap from it.
 

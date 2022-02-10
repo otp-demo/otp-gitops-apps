@@ -1,0 +1,33 @@
+kind: Job
+apiVersion: batch/v1
+metadata:
+  name: bank-rhsso-config
+  namespace: sso-integration
+  labels:
+    app: bank-rhsso-config
+spec:
+  template:
+    metadata:
+      name: bank-rhsso-config
+    spec:
+      containers:
+        - name: bank-rhsso-config
+          image: quay.io/alexocc/bank-rhsso-config
+          env:
+            - name: RHSSO_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: argocd-configs
+                  key: KEYCLOAK_HOSTNAME
+            - name: RHSSO_ADMIN_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: argocd-configs
+                  key: USER_NAME
+            - name: RHSSO_ADMIN_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: argocd-configs
+                  key: PASSWORD
+          imagePullPolicy: Always
+      restartPolicy: Never

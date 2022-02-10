@@ -1,0 +1,20 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: mobile-simulator-service
+  namespace: bank-infra
+  annotations:
+    global-load-balancer-operator.redhat-cop.io/health-check: >-
+      {"httpGet":{"path":"/","port":8080,"scheme":"HTTP"},"timeoutSeconds":1,"periodSeconds":10,"successThreshold":1,"failureThreshold":1}
+    global-load-balancer-operator.redhat-cop.io/load-balancing-policy: Latency
+  labels:
+    route-type: global
+spec:
+  host: bank.swinney.io
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: mobile-simulator-service
+    weight: 100
+  wildcardPolicy: None

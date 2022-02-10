@@ -1,0 +1,18 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  annotations:
+    apps.open-cluster-management.io/git-branch: master
+    apps.open-cluster-management.io/git-path: bank-app/mobile-simulator/mobile-simulator
+    apps.open-cluster-management.io/reconcile-option: merge
+  labels:
+    app: mobile-simulator
+  name: mobile-simulator-subscription-1
+  namespace: bank-infra
+spec:
+  channel: bank-infra/mobile-simulator-app-latest
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: mobile-simulator-placement-1

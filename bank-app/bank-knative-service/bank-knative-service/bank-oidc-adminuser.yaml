@@ -1,0 +1,21 @@
+apiVersion: external-secrets.io/v1alpha1
+kind: ExternalSecret
+metadata:
+  name: bank-oidc-adminuser
+  namespace: bank-infra
+spec:
+  refreshInterval: "15s"
+  secretStoreRef:
+    name: secretstore-vault
+    kind: ClusterSecretStore
+  target:
+    name: bank-oidc-adminuser
+  data:
+  - secretKey: APP_ID_ADMIN_PASSWORD
+    remoteRef:
+      key: new-example-bank/bank-oidc-adminuser
+      property: APP_ID_ADMIN_PASSWORD
+  - secretKey: APP_ID_ADMIN_USER
+    remoteRef:
+      key: new-example-bank/bank-oidc-adminuser
+      property: APP_ID_ADMIN_USER

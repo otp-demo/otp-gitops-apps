@@ -1,7 +1,7 @@
 apiVersion: "logging.openshift.io/v1"
 kind: ClusterLogForwarder
 metadata:
-  name: aws-cloudwatch 
+  name: instance 
   namespace: openshift-logging 
 spec:
   outputs:

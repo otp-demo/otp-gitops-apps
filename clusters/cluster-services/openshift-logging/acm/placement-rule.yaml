@@ -6,8 +6,6 @@ metadata:
     app.kubernetes.io/instance: apps-cluster-services-openshift-logging  
   name: openshift-logging-placement-1
   namespace: openshift-logging 
-  labels:
-    app: openshift-logging
 spec:
   clusterConditions:
   - status: "True"

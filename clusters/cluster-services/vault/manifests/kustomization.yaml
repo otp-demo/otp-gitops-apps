@@ -37,7 +37,7 @@ patches:
     patch: |-
       - op: replace 
         path: /spec/host
-        value: vault.swinney.io
+        value: vault.multicloudhubcluster.com
   - target:
       kind: Certificate 
       name: vault-route
@@ -48,7 +48,7 @@ patches:
           - vault.apps.aws0.mutihybridcloudkitchen.com
           - vault.apps.aws1.mutihybridcloudkitchen.com
           - vault.apps.azure0.azure01.ibmdojo01.com
-          - vault.swinney.io
+          - vault.multicloudhubcluster.com
   - target:
       kind: Certificate 
       name: vault-tls

@@ -10,7 +10,7 @@ metadata:
   labels:
     route-type: global
 spec:
-  host: bank.global.swinney.io
+  host: bank.swinney.io
   port:
     targetPort: 8080
   to:

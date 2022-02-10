@@ -1,0 +1,12 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  labels:
+    app: bank-knative-service
+  name: bank-knative-service-placement-1
+  namespace: bank-infra
+spec:
+  clusterSelector:
+    matchLabels:
+      'cluster.open-cluster-management.io/clusterset': 'multicloud-cluster-set'

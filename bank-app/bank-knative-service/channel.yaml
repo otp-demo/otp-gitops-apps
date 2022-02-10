@@ -1,0 +1,9 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: bank-knative-service-app-latest
+  namespace: bank-infra
+spec:
+  pathname: https://github.com/otp-demo/otp-gitops-apps.git
+  type: GitHub

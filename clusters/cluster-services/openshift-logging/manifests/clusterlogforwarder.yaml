@@ -1,0 +1,22 @@
+apiVersion: "logging.openshift.io/v1"
+kind: ClusterLogForwarder
+metadata:
+  name: aws-cloudwatch 
+  namespace: openshift-logging 
+spec:
+  outputs:
+   - name: cw 
+     type: cloudwatch 
+     cloudwatch:
+       groupBy: namespaceName
+       region: ap-southeast-2
+     secret:
+        name: aws-credentials 
+  pipelines:
+    - name: infra-logs 
+      inputRefs: 
+        - infrastructure
+        - audit
+        - application
+      outputRefs:
+        - cw 

@@ -4,6 +4,8 @@ kind: Channel
 metadata:
   name: openshift-logging-channel
   namespace: openshift-logging
+  labels: 
+    app.kubernetes.io/instance: apps-cluster-services-openshift-logging
 spec:
   pathname: https://github.com/otp-demo/otp-gitops-apps.git  
   type: GitHub

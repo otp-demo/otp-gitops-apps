@@ -7,12 +7,12 @@ metadata:
     apps.open-cluster-management.io/git-path: clusters/cockroachdb/aws/deploy-cockroachdb/deploy
     apps.open-cluster-management.io/reconcile-option: merge
   labels:
-    app: cockroachdb
+    app: cockroachdb-aws
   name: cockroachdb-subscription-aws
   namespace: multi-cluster-cockroachdb
 spec:
-  channel: multi-cluster-cockroachdb/cockroachdb-channel
+  channel: multi-cluster-cockroachdb/cockroachdb-aws-channel
   placement:
     placementRef:
       kind: PlacementRule
-      name: cockroachdb-placement-1
+      name: cockroachdb-placement-aws

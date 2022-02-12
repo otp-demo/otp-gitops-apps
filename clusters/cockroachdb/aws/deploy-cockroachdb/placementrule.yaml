@@ -4,7 +4,7 @@ kind: PlacementRule
 metadata:
   labels:
     app: cockroachdb
-  name: cockroachdb-placement-1
+  name: cockroachdb-placement-aws
   namespace: multi-cluster-cockroachdb
 spec:
   clusterSelector:

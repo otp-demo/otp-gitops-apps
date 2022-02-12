@@ -2,7 +2,7 @@
 apiVersion: apps.open-cluster-management.io/v1
 kind: Channel
 metadata:
-  name: cockroachdb-channel
+  name: cockroachdb-aws-channel
   namespace: multi-cluster-cockroachdb
 spec:
   pathname: https://github.com/otp-demo/otp-gitops-apps.git

@@ -8,7 +8,7 @@ metadata:
     apps.open-cluster-management.io/reconcile-option: merge
   labels:
     app: cockroachdb
-  name: cockroachdb-subscription
+  name: cockroachdb-subscription-aws
   namespace: multi-cluster-cockroachdb
 spec:
   channel: multi-cluster-cockroachdb/cockroachdb-channel

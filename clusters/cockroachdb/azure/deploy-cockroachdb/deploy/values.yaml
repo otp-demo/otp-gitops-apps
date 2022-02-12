@@ -5,8 +5,11 @@
 global_base_domain: azure01.ibmdojo01.com
 
 clusterNames:
-  - cdb-azure-1
-  - cdb-azure-3
+  - aws0
+  - aws1
+  - aws2
+  - azure0
+  - azure1
 
 infrastructure: azure
 

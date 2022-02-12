@@ -2,11 +2,14 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-global_base_domain: global.ibmsbaasonaws.com 
+global_base_domain: mutihybridcloudkitchen.com
 
 clusterNames:
-  - aws-cluster-shared-0
-  - aws-cluster-shared-1
+  - aws0
+  - aws1
+  - aws2
+  - azure0
+  - azure1
 
 infrastructure: aws
 

@@ -5,5 +5,5 @@ metadata:
   name: cockroachdb-channel
   namespace: multi-cluster-cockroachdb
 spec:
-  pathname: https://github.com/otp-az-sub/otp-gitops-apps.git
+  pathname: https://github.com/otp-demo/otp-gitops-apps.git
   type: GitHub

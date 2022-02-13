@@ -9,7 +9,7 @@ spec:
     spec:
       containers:
       - name: cockroachdb-post-deploy-{{ . }}
-        image: quay.io/marwan_attar_ibm/cockroachdb_initialisation 
+        image: quay.io/marwan_attar_ibm/cockroachdb_initialisation:latest
         imagePullPolicy: Always
         env:
           - name: CLUSTER_LIST

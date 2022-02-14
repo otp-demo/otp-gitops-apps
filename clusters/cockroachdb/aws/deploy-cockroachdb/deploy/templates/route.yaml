@@ -9,7 +9,7 @@ spec:
   usages:
     - server auth
   dnsNames:
-  - cockroachdb.{{ .Values.global_base_domain }}
+  - cockroachdb.swinney.io
   duration: 168h
   renewBefore: 1h  
   issuerRef:
@@ -33,7 +33,7 @@ metadata:
     route-type: global    
   name: {{ template "cockroachdb-multicluster.fullname" . }}
 spec:
-  host: cockroachdb.{{ .Values.global_base_domain }}
+  host: cockroachdb.swinney.io
   port:
     targetPort: http
   tls:

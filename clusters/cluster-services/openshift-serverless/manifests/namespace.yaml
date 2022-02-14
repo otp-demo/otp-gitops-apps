@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+  labels:
+    kubernetes.io/metadata.name: openshift-serverless
+    name: openshift-serverless
+  name: openshift-serverless
+spec:
+  finalizers:
+  - kubernetes

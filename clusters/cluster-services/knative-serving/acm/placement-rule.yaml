@@ -1,0 +1,16 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: knative-serving-placement-1
+  namespace: knative-serving
+  labels:
+    app: knative-serving
+spec:
+  clusterConditions:
+  - status: "True"
+    type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions: []
+    matchLabels:
+      # Replace value with Cluster you wish to provision too.
+      cluster.open-cluster-management.io/clusterset: multicloud-cluster-set

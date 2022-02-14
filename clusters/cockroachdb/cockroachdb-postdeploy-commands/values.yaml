@@ -1,0 +1,6 @@
+cdbClusters:
+  - aws0
+  - aws2
+  - azure1
+
+aliasIdentifier: ABCDEF

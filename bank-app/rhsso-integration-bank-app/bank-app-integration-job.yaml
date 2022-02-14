@@ -29,5 +29,9 @@ spec:
                 configMapKeyRef:
                   name: argocd-configs
                   key: PASSWORD
+            - name: RHSSO_TEST_USER
+              value: "knative"
+            - name: RHSSO_TEST_PASSWORD
+              value: "knative"
           imagePullPolicy: Always
       restartPolicy: Never

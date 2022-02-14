@@ -1,0 +1,9 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: openshift-serverless-channel
+  namespace: openshift-serverless
+spec:
+  pathname: https://github.com/otp-demo/otp-gitops-apps.git
+  type: GitHub

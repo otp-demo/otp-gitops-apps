@@ -121,3 +121,35 @@ To apply
 ```
 envsubst < vault-issuer.yaml | oc apply -f - -n cert-manager
 ```
+
+# Using
+To generate certificates and keys from the vault-pki cluster the following can be used as a template, the point to note is the issuerRef name is vault-pki and its kind is a ClusterIssuer
+
+```
+---
+# Source: vault-multicluster/templates/vault-certs.yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert-example
+spec:
+  # Secret names are always required.
+  secretName: cert-example
+  commonName: cert-example
+  usages:
+    - server auth
+    - client auth
+  dnsNames:
+  - example.svc
+  - example.cluster.local
+  - etc
+  - etc
+  issuerRef:
+    name: vault-pki
+    # We can reference ClusterIssuers by changing the kind here.
+    # The default value is Issuer (i.e. a locally namespaced Issuer)
+    kind: ClusterIssuer
+    # This is optional since cert-manager will default to this value however
+    # if you are using an external issuer, change this to that issuer group.
+    group: cert-manager.io
+```

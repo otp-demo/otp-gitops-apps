@@ -1,6 +1,6 @@
 # Vault
 # Introduction
-The vault deployment is taken in part from the [openshift-modern-availabilty] collection of openshift applications and tools. Modifications have been made to automate it through gitops and fit the OTP pattern.
+The vault deployment is taken in part from the [openshift-modern-availability](https://github.com/raffaelespazzoli/openshift-modern-availability/blob/master/establishing-trust.md) collection of openshift applications and tools. Modifications have been made to automate it through gitops and fit the OTP pattern.
 
 ![vault-cluster](vault-cluster.png "Vault Cluster Topology")
 
@@ -18,14 +18,15 @@ A kustomization is included, which is setup to provide adjust DNS names used in 
 ## Config
 What needs to be updated is leader_api_addrs with the address of each vault instance, this can be predetermined before deployment, the same config file is for each deployment.
 
-[openshift-modern-availability]: https://github.com/raffaelespazzoli/openshift-modern-availability/blob/master/establishing-trust.md
-[README.md]: https://github.com/nickmerrett/otp-gitops-services/tree/master/instances/cert-manager
+## Initialisation
+**Currently this process is not automated**
 
-## Initialisation and Unsealing
-Once the cluster(s) are installed vault needs to be initialised, this will generate the unseal keys and root token, which should be kept safely and securely somewhere else. Currently this is **not** automated.
+Once the cluster(s) are installed vault needs to be initialised, this will generate the unseal keys and root token, which should be kept safely and securely somewhere else. 
+
+Note: The following examples are being executed from within a vault pod.
 
 ```
-exec vault-0 -n vault -- vault operator init -address https://vault-0.cluster1.vault-internal.vault.svc.clusterset.local:8200 -ca-path /etc/vault-tls/ca.crt -format=json -recovery-shares 1 -recovery-threshold 1)
+vault operator init -address https://vault-0.cluster1.vault-internal.vault.svc.clusterset.local:8200 -ca-path /etc/vault-tls/ca.crt -format=json -recovery-shares 1 -recovery-threshold 1)
 
 {
   "unseal_keys_b64": [
@@ -52,18 +53,27 @@ exec vault-0 -n vault -- vault operator init -address https://vault-0.cluster1.v
 }
 
 ```
+## Unsealing
+**Currently this process is not automated**
 
-The vault will be initalised in a sealed state, **each** node needs to be unsealed for it to join the cluster. The unseal keys are used for this purpose. You can unseal the other vaults from the same pod its not necessary to change. This will need to be performed 3 times, each time using a different unseal key. 
+The vault will be initalised in a sealed state, **each** node needs to be unsealed for it to join the cluster. 
+The unseal keys generated in the inialisation are used for this purpose. 
 
-**Currently this process is not automated.**
+The following command is used to unseal, its is being issued from within a Vault pod. After issuing the command you will be prompted for an unseal key, you can chose any one of the 5 keys generated. This will need to be performed 3 times, each time using a different unseal key. 
+
+You can unseal the other vaults from the same pod its not necessary to change pods or clusters.
 
 ```
-exec vault-0 -n vault -- vault operator unseal -address https://vault-2.azure0.vault-internal.vault.svc.clusterset.local:8200 -ca-path /etc/vault-tls/ca.crt
+vault operator unseal -address https://vault-2.azure0.vault-internal.vault.svc.clusterset.local:8200 -ca-path /etc/vault-tls/ca.crt
 ```
 
-Finally you can check the status of the cluster using;
+Background information on vaults sealing and unsealing https://www.vaultproject.io/docs/concepts/seal
+
+## Cluster Health
+To check the status of the cluster use the following
+
 ``` 
-exec vault-0 -n vault -- vault operator raft list-peers -address https://vault-0.aws1.vault-internal.vault.svc.clusterset.local:8200 -ca-path /etc/vault-tls/ca.crt
+vault operator raft list-peers -address https://vault-0.aws1.vault-internal.vault.svc.clusterset.local:8200 -ca-path /etc/vault-tls/ca.crt
 Node              Address                                                          State       Voter
 ----              -------                                                          -----       -----
 vault-0-aws0      vault-0.aws0.vault-internal.vault.svc.clusterset.local:8201      leader      true
@@ -77,13 +87,17 @@ vault-0-azure0    vault-0.azure0.vault-internal.vault.svc.clusterset.local:8201 
 vault-2-azure0    vault-2.azure0.vault-internal.vault.svc.clusterset.local:8201    follower    false
 ```
 
+Extra information on a node can be gained from 
+
 # Extra Information 
+## Backing Storage
+Vault uses the default storageclass for creating its PVCs.
 ## Communications
 The deployment takes advantage of submariner (also part of the OTP pattern) to create Layer 3 tunnels using IPSec to create a secure and consistent (in naming and behavior) connection between clusters.
 
 The Vault nodes are configured in a mesh, i.e all nodes talking to all nodes.
 ## TLS
-TLS certificates are used between each node. Their creation is handled by a local instance of cert-manager using a self signed CA, that is acting as an intermediate CA for that cluster and namespace. Refer to the cert-manager [README.md] for more details.
+TLS certificates are used between each node. Their creation is handled by a local instance of cert-manager using a self signed CA, that is acting as an intermediate CA for that cluster and namespace. Refer to the cert-manager [README.md]( https://github.com/nickmerrett/otp-gitops-services/tree/master/instances/cert-manager) for more details.
 
 Certificates are also created for the routes created for external access, the certificates when created should also include DNS names for all possible external URLs. These certificates are generated off the self-signed CA and thus will come up as untrusted/unsafe in web browsers. Applications accessing the vault including, cert-manager and external-secrets will likely need to have CA bundles supplied in order for them to open a trusted TLS connection to the vault.
 

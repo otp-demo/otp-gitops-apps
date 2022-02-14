@@ -1,6 +1,6 @@
 # Openshit Logging
-Openshift logging provide both the tools to collect logs from  a cluster and then to eithier store and process them locally using elasticsearch and kibana. However this does not scale all that well when my clusters are used or they are ephemeral. 
-The solution is aggregate logs to a central store outside the clusters. Openshift supports a number of differnt forwarding backends.
+Openshift logging provide both the tools to collect logs from  a cluster and then to either store and process them locally using elasticsearch and kibana. However this does not scale all that well when my clusters are used or they are ephemeral. 
+The solution is aggregate logs to a central store outside the clusters. Openshift supports a number of different forwarding backends.
  - elasticsearch
  - syslog
  - cloudwatch
@@ -28,7 +28,7 @@ spec:
       fluentd: {}
 ```
 
-ClusterLogForwrder to forwward the logs to cloudwatch
+ClusterLogForwarder to forward the logs to cloudwatch
 ```
 apiVersion: "logging.openshift.io/v1"
 kind: ClusterLogForwarder
@@ -86,7 +86,7 @@ spec:
       property: aws_secret_access_key
 ```
 
-Currently secret creation within vault is not automated and will need to be performed manually. THe following will create the matching secrets via CLI.
+Currently secret creation within vault is not automated and will need to be performed manually. The following will create the matching secrets via CLI.
 
 ```
 vault kv put -tls-skip-verify secrets/awscreds aws_secret_access_key=<ACCESS_KEY>

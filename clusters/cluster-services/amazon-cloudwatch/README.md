@@ -1,11 +1,11 @@
 # Amazon CloudWatch Agent
 ## Introduction
-This Amazon Cloud Watch instance deploys the amazon cloudwatch agent, which has been configured to scrape metrics from the built in prometheus instance of the OCP cluster and ship them to Amazon CloudWatch.
+This Amazon Cloud Watch instance deploys the amazon cloudwatch agent, which has been configured to scrape metrics from the built in prometheus instance of the OCP cluster and ship them to Amazon CloudWatch for aggregation.
 
 ## Credentials
 AWS credentials are needed for the logs to appear in the correct account.
 
-The way it has been configured is to pull the credentials file (example below) from the vault, stored under the path secrets/awscreds. The pulling is done be the external secrets operator which is preconfigured. 
+The method used within the pattern is to pull the credentials **file** (example below) from the vault, stored under vault path secrets/awscreds. The pulling is done by the external secrets operator which is preconfigured and installed on each cluster.
 
 Example credentials file
 ```
@@ -14,15 +14,10 @@ aws_access_key_id=
 aws_secret_access_key=
 ```
 
-The corresponding IAM policy in AWS is CloudWatchAgentServerPolicy it needs to be applied to the profile that the credentials belong too.
-
-**DO NOT COMMIT CREDENTIALS GIT**
-
+The corresponding IAM policy that needs toe be enabled against the credentials is CloudWatchAgentServerPolicy, without this the metrics wont be saved.
 
 ## Configuration
-This is for informational purposes, the clustername customization is done automatically, when the application is deployed, a job will run, find the cluster name and create the config map
-
-Similar to the credentials, a configuration file that is cluster (maybe not always) specific needs to be also created, the configMapGenerator function of kustomize is also used to read the contents of the cwagentconfig.json and create a configmap from it.
+A configuratio file is used to inform the agent of what metrics to collect and where to send them. The clustername customization is done automatically, when the application is deployed, a job will run, find the cluster name and create the config map accordingly.
 
 Region, this can be the same for all, but does not have to be.
 ```

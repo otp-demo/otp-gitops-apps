@@ -1,8 +1,8 @@
 # External Secrets
 
-The manifests in this folder will install the External Secrets, unfortunately the community operator would not install correctly, and so the method used was to generate the manifests and install them directly
+The manifests in this folder will install the External Secrets, unfortunately the community operator would not install correctly, and so the method used was to generate the manifests and install them directly.
  
-External secrets provides a method to sync secrets from an external keystore, and write them to a local secret in OpenShift/Kubernetes. It will not write to the external key store, thus the secrets have to be updated outside the normal workflow of the OTP Pattern.
+External secrets provides a method to sync secrets from an external keystore, and write them to a local secret in OpenShift/Kubernetes. It will **not** write to the external key store, thus the secrets have to be updated outside the normal workflow of the OTP Pattern or by other means.
 
 External Secrets Supports a number of backing keystores, many can be used in parallel if need be.
  + AWS Secrets Manager
@@ -20,11 +20,13 @@ External Secrets Supports a number of backing keystores, many can be used in par
 
 For more info refer to https://external-secrets.io/ and https://github.com/external-secrets/external-secrets
 
-Once the operator is installed then Secret Stores and External Secrets need to be defined, a Secret Store can either be a ClusterSecretStore or a SecretStore, the SecretStore is resticted to the namespace its in while the ClusterSecretStore is cluster wide.
+Once the operator is installed then Secret Stores and External Secrets need to be defined, a Secret Store can either be a ClusterSecretStore or a SecretStore, the SecretStore is restricted to the namespace its in while the ClusterSecretStore is cluster wide.
 
 # Definitions
 ## ClusterSecretStore
 The following is an example of creating a ClusterSecretStore for a Vault backend hosted within the Openshift Cluster (which is also part of the pattern), however the vault could be anywhere.
+Note this method uses vault token authentication, there are other authentication methods also available including [kubernetes authentication](https://www.vaultproject.io/docs/auth/kubernetes)
+
 
 Replace the \<VAULT ROOT CA IN BASE64\> AND \<VAULT TOKEN IN BASE64\>
 
@@ -50,7 +52,7 @@ spec:
           key: "token"
 ```
 
-And the coresponding Secret for the token
+And the corresponding Secret for the token
 ```
 ---
 apiVersion: v1
@@ -64,11 +66,7 @@ data:
 
 
 ## ExternalSecret
-The External Secret Definition defines;
- - The Secret Store to use (see above) (secretStoreRef)
- - The Kubernetes Secret to Sync too (target)
- - The Sync Frequency (refreshInterval)
- - The secret definition from the External Store (remoteRef)
+Once a SecretStore is inplace then an ExternalSecret can be used, what this essentially does its maps a path and secret from within vault (or other KMS) and maps it to a secret within a given kuberentes namespace. It also informs the secretstore to use (thus many can be used) and the frequency to refresh the local copy of the secret.
 
 The following is an example the goes with the ClusterSecretStore definition above
  ```
@@ -82,30 +80,36 @@ spec:
     name: secretstore-vault
     kind: ClusterSecretStore
   target:
-    name: example-sync
+    name: example-sync     #1
   data:
-  - secretKey: foobar
+  - secretKey: foobar      #2
     remoteRef:
-      key: secret/foo
-      property: my-value
+      key: secret/foo      #3
+      property: my-value   #4
 ```
 
-The coresponding Kuberentes secret defintion that the remote secret will be synced to.
+The corresponding Kuberentes secret defintion that the remote secret will be synced to.
 ```
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: example-sync
+  name: example-sync      #1
 data:
-  foobar: czNjcjN0
+  foobar: czNjcjN0        #2 + #4
 ```
 
+To help in understanding the mapping 
+ 1. The name of the secret in kubernetes
+ 2. The name key within the secret in kubernetes
+ 3. The path to the secret in the vault (KMS)
+ 4. The secret under the path specified in #3. 
 
 ## Creating Vault Secrets
-Once a vault cluster has been initalized, then the corresponding cofiguration is will create secrets that the example ClusterSecretStore and ExternalSecret will work with.
+Once a vault cluster has been initalized, then the corresponding commands will create secrets that the example ClusterSecretStore and ExternalSecret will work with.
 
-These commands are run from within the vault pod i.e. 
+Note: These commands as shown are run from within the vault pod, however the vault cli can run from anywhere that has vault access. There is also a Web based UI as well.
+
 ``` 
 oc exec -it vault-0 -n vault -- sh 
 

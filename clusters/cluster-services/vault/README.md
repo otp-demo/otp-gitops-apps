@@ -4,25 +4,25 @@ The vault deployment is taken in part from the [openshift-modern-availabilty] co
 
 ![vault-cluster](vault-cluster.png "Vault Cluster Topology")
 
-Vault is primarly being used to provide a key-value store for secrets, used in conjunction with the external-secrets tool allows for secrets to be centralised in cloud provider agnostic and decentralised method. The vault installation is setup to be deployed on 3 (this could be increased) fixed pre-determind clusters. ideally a cluster would be placed in each cloud provider to cover of an outage in the other provider.
+Vault is primarily being used to provide a key-value store for secrets, used in conjunction with the external-secrets tool allows for secrets to be centralised in cloud provider agnostic and decentralised method. The vault installation is setup to be deployed on 3 (this could be increased) fixed pre-determined clusters. ideally a cluster would be placed in each cloud provider to cover of an outage in the other provider.
 
-Each cluster has 3 vault nodes running, in total there are 9 vault nodes running and communicating with eachother.
+Each cluster has 3 vault nodes running, in total there are 9 vault nodes running and communicating with each other.
 
 Data is stored in each persistent volume, attached to each node.
 
 # Installation
-Installation is mananaged through argocd, access and small local cluster customisation is configured automatically. Currently a kustomization file needs to be updated to align cluster and dns names across all nodes. 
+Installation is managed through argocd, access and some minor local cluster customization is configured automatically. Currently a kustomization file needs to be updated to align cluster and dns names across all nodes. 
 
 ## Kustomization 
 A kustomization is included, which is setup to provide adjust DNS names used in certificates generated and similar for the configuration file.
 ## Config
-What needs to be updated is leader_api_addrs with the address of each vault instance, this can be predetermined before deployment, the same config file for each deployment.
+What needs to be updated is leader_api_addrs with the address of each vault instance, this can be predetermined before deployment, the same config file is for each deployment.
 
 [openshift-modern-availability]: https://github.com/raffaelespazzoli/openshift-modern-availability/blob/master/establishing-trust.md
 [README.md]: https://github.com/nickmerrett/otp-gitops-services/tree/master/instances/cert-manager
 
-## Initaliation and Unsealing
-Once the cluster(s) are installed vault needs to be initaised, this will genereate the unseal keys and root token, which should be keept safely and securly somewhere else. Currently this is not automated.
+## Initialisation and Unsealing
+Once the cluster(s) are installed vault needs to be initialised, this will generate the unseal keys and root token, which should be kept safely and securely somewhere else. Currently this is **not** automated.
 
 ```
 exec vault-0 -n vault -- vault operator init -address https://vault-0.cluster1.vault-internal.vault.svc.clusterset.local:8200 -ca-path /etc/vault-tls/ca.crt -format=json -recovery-shares 1 -recovery-threshold 1)
@@ -53,9 +53,9 @@ exec vault-0 -n vault -- vault operator init -address https://vault-0.cluster1.v
 
 ```
 
-The vault will be initalised in a sealed state, each node needs to be unsealed for it to join the cluster. The unseal keys are used for this purpose. You can unseal the other vaults from the same pod its necessary to change. This will need to be perfomed 3 times, each time using a different unseal key. 
+The vault will be initalised in a sealed state, **each** node needs to be unsealed for it to join the cluster. The unseal keys are used for this purpose. You can unseal the other vaults from the same pod its not necessary to change. This will need to be performed 3 times, each time using a different unseal key. 
 
-Currently this process is not automated.
+**Currently this process is not automated.**
 
 ```
 exec vault-0 -n vault -- vault operator unseal -address https://vault-2.azure0.vault-internal.vault.svc.clusterset.local:8200 -ca-path /etc/vault-tls/ca.crt
@@ -79,13 +79,13 @@ vault-2-azure0    vault-2.azure0.vault-internal.vault.svc.clusterset.local:8201 
 
 # Extra Information 
 ## Communications
-The deployment takes advantage of submariner (also part of the OTP pattern) to create Layer 3 tunnels using IPSec to create a secrure and consistent (in naming and behaviour) connection between clusters.
+The deployment takes advantage of submariner (also part of the OTP pattern) to create Layer 3 tunnels using IPSec to create a secure and consistent (in naming and behavior) connection between clusters.
 
 The Vault nodes are configured in a mesh, i.e all nodes talking to all nodes.
 ## TLS
-TLS certificates are used between each node. Their creation is handled by a local intance of cert-manager, that is acting as an intermediate CA for that cluster and namespace. Refer to the cert-manager [README.md] for more details.
+TLS certificates are used between each node. Their creation is handled by a local instance of cert-manager using a self signed CA, that is acting as an intermediate CA for that cluster and namespace. Refer to the cert-manager [README.md] for more details.
 
-Certificates are also created for the routes created for external access, the certificates when created should also include DNS names for all possible external URLs.
+Certificates are also created for the routes created for external access, the certificates when created should also include DNS names for all possible external URLs. These certificates are generated off the self-signed CA and thus will come up as untrusted/unsafe in web browsers. Applications accessing the vault including, cert-manager and external-secrets will likely need to have CA bundles supplied in order for them to open a trusted TLS connection to the vault.
 
 ## External Load Balancer
 
@@ -93,7 +93,7 @@ Certificates are also created for the routes created for external access, the ce
 Health checks can be configured to check the /v1/sys/health path, the checks are quite detailed, as vault has a number of states. 
 
 The main states to check are;
- -  "sealed" should be false for normal operation 
+ - "sealed" should be false for normal operation 
  - standby should be false for normal operation
 
 ```

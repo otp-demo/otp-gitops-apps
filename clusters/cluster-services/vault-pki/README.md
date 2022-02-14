@@ -34,7 +34,8 @@ vault write -tls-skip-verify pki/root/generate/internal common_name=cert-manager
 The next steps might need to be adjusted for your installation, especially the allowed domains section, i.e. example.com
 ```
 vault write -tls-skip-verify pki/config/urls issuing_certificates="http://vault.vault.svc:8200/v1/pki/ca" crl_distribution_points="http://vault.vault.svc:8200/v1/pki/crl"
-vault write -tls-skip-verify pki/roles/cert-manager allowed_domains=svc,svc.cluster.local,svc.clusterset.local,node,root,yugabyte,keycloak,vault,cockroachdb,example.com allow_bare_domains=true allow_subdomains=true allow_localhost=false enforce_hostnames=false
+vault write -tls-skip-verify pki/roles/cert-manager allowed_domains=svc,svc.cluster.local,svc.clusterset.local,node,root,yugabyte,keycloak,vault,cockroachdb,example.com,swinney.io,mutihyrbidcloudkitchen.com \ 
+ allow_bare_domains=true allow_subdomains=true allow_localhost=false enforce_hostnames=false
 ```
 
 Finally create the policy for the cert-manager user

@@ -69,6 +69,12 @@ conf:
       - cockroachdb-0.azure1.cockroachdb.multi-cluster-cockroachdb.svc.clusterset.local
       - cockroachdb-1.azure1.cockroachdb.multi-cluster-cockroachdb.svc.clusterset.local
       - cockroachdb-2.azure1.cockroachdb.multi-cluster-cockroachdb.svc.clusterset.local
+      - cockroachdb-0.azure0.cockroachdb.multi-cluster-cockroachdb.svc.clusterset.local
+      - cockroachdb-1.azure0.cockroachdb.multi-cluster-cockroachdb.svc.clusterset.local
+      - cockroachdb-2.azure0.cockroachdb.multi-cluster-cockroachdb.svc.clusterset.local
+      - cockroachdb-0.aws1.cockroachdb.multi-cluster-cockroachdb.svc.clusterset.local
+      - cockroachdb-1.aws1.cockroachdb.multi-cluster-cockroachdb.svc.clusterset.local
+      - cockroachdb-2.aws1.cockroachdb.multi-cluster-cockroachdb.svc.clusterset.local
 
 
   # Logs at or above this threshold to STDERR.

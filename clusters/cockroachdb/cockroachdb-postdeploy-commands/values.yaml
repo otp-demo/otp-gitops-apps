@@ -2,5 +2,7 @@ cdbClusters:
   - aws0
   - aws2
   - azure1
+  - azure0
+  - aws1
 
 aliasIdentifier: ABCDEF

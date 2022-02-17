@@ -6,10 +6,8 @@
 
 clusterNames:
   - aws0
-  - aws2
-  - azure1
-  - azure0
   - aws1
+  - aws2
 
 # infrastructure: aws
 

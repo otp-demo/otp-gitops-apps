@@ -21,7 +21,7 @@ spec:
           - name: STATEFULSET
             value: cockroachdb
           - name: ORGANISATION
-            value: "Red Hat "
+            value: "Red Hat"
           - name: LICENSE
             value: "crl-0-ELnh2JEGGAIiB1JlZCBIYXQ"
       restartPolicy: OnFailure

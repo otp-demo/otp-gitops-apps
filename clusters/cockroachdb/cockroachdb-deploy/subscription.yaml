@@ -4,7 +4,7 @@ kind: Subscription
 metadata:
   annotations:
     apps.open-cluster-management.io/git-branch: master
-    apps.open-cluster-management.io/git-path: clusters/cockroachdb/azure/deploy-cockroachdb/deploy
+    apps.open-cluster-management.io/git-path: clusters/cockroachdb/cockroachdb-deploy/deploy
     apps.open-cluster-management.io/reconcile-option: merge
   labels:
     app: cockroachdb
@@ -15,4 +15,4 @@ spec:
   placement:
     placementRef:
       kind: PlacementRule
-      name: cockroachdb-placement-1
+      name: cockroachdb-placement

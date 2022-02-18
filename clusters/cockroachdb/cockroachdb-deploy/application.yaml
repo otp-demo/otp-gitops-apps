@@ -14,4 +14,4 @@ spec:
       - key: app
         operator: In
         values:
-          - cockroachdb-aws
+          - cockroachdb

@@ -4,10 +4,10 @@ kind: PlacementRule
 metadata:
   labels:
     app: cockroachdb
-  name: cockroachdb-placement-1
+  name: cockroachdb-placement
   namespace: multi-cluster-cockroachdb
 spec:
   clusterSelector:
     matchLabels:
-      cdb: azure
+      workload: cockroachdb
       

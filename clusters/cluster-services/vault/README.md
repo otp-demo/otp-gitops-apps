@@ -57,7 +57,7 @@ vault operator init -address https://vault-0.cluster1.vault-internal.vault.svc.c
 **Currently this process is not automated**
 
 The vault will be initalised in a sealed state, **each** node needs to be unsealed for it to join the cluster. 
-The unseal keys generated in the inialisation are used for this purpose. 
+The unseal keys generated in the initialisation are used for this purpose. 
 
 The following command is used to unseal, its is being issued from within a Vault pod. After issuing the command you will be prompted for an unseal key, you can chose any one of the 5 keys generated. This will need to be performed 3 times, each time using a different unseal key. 
 

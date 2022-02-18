@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cockroachdb-post-deploy
+  namespace: openshift-gitops
+spec:
+  template:
+    spec:
+      containers:
+      - name: cockroachdb-pre-deploy
+        image: quay.io/marwan_attar_ibm/openshift-cluster-labeller:latest
+        imagePullPolicy: Always
+        env:
+          - name: CLUSTER_LIST
+            value: {{ .Values.cdbClusters }}
+          - name: KEY
+            value: {{ .Values.key }}
+          - name: VALUE
+            value: {{ .Values.value }}
+      restartPolicy: OnFailure
+  backoffLimit: 2

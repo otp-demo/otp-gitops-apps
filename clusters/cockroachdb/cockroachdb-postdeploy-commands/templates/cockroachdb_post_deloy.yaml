@@ -19,7 +19,11 @@ spec:
           - name: NAMESPACE
             value: multi-cluster-cockroachdb
           - name: STATEFULSET
-            value: cockroachdb  
+            value: cockroachdb
+          - name: ORGANISATION
+            value: "Red Hat "
+          - name: LICENSE
+            value: "crl-0-ELnh2JEGGAIiB1JlZCBIYXQ"
       restartPolicy: OnFailure
   backoffLimit: 2
 ---

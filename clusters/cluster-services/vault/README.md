@@ -127,10 +127,10 @@ The main states to check are;
 Refer to Vault's docs for more details https://www.vaultproject.io/api-docs/system/health
 
 # Use
-Vault is used in to ways for the OTP pattern;
+Vault is used in 2 ways for the OTP pattern;
 - Secrets
 - PKI Certificate Authority
 
-The diagram  below shows the relationship to the ExternalSecrets opertor and Cert-Manager vault PKI intergrations. One thing to note the SecretStore and Issuer can either be namespace defined (and thus locked) or global to the cluster.
+The diagram  below shows the relationship to the ExternalSecrets operator and Cert-Manager vault PKI integration. One thing to note the SecretStore and Issuer can either be namespace defined (and thus locked) or global to the cluster.
 
 ![vault-uses](vault-uses.png "Vault Use Cases")

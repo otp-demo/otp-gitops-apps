@@ -87,9 +87,6 @@ vault-0-azure0    vault-0.azure0.vault-internal.vault.svc.clusterset.local:8201 
 vault-2-azure0    vault-2.azure0.vault-internal.vault.svc.clusterset.local:8201    follower    false
 ```
 
-Extra information on a node can be gained from 
-
-# Extra Information 
 ## Backing Storage
 Vault uses the default storageclass for creating its PVCs.
 ## Communications

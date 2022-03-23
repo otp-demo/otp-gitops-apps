@@ -1,0 +1,7 @@
+cdbClusters:
+  - aws0
+  - aws1
+  - aws2
+
+key: workload
+value: cockroachdb

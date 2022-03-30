@@ -1,0 +1,12 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  labels:
+    app: spring-boot-example 
+  name: spring-boot-example-placement-1
+  namespace: demo 
+spec:
+  clusterSelector:
+    matchLabels:
+      'cluster.open-cluster-management.io/clusterset': 'multicloud-cluster-set'

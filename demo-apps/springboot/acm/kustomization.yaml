@@ -4,3 +4,5 @@ resources:
 - namespace.yaml
 - subscription.yaml
 - application.yaml
+
+namespace: telstra-customer-a

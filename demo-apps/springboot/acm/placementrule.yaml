@@ -9,4 +9,4 @@ metadata:
 spec:
   clusterSelector:
     matchLabels:
-      'cluster.open-cluster-management.io/clusterset': 'multicloud-cluster-set'
+      'app: springboot'

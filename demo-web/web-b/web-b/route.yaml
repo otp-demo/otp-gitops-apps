@@ -1,0 +1,22 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/host.generated: "true"
+  labels:
+    app: demo-web
+    app.kubernetes.io/component: demo-web
+    app.kubernetes.io/instance: demo-web
+    app.kubernetes.io/name: demo-web
+  name: demo-web-b
+  namespace: telstra-customer-b
+spec:
+  port:
+    targetPort: 80-tcp
+  tls:
+    termination: edge
+  to:
+    kind: Service
+    name: demo-web
+    weight: 100
+  wildcardPolicy: None

@@ -1,0 +1,49 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  annotations:
+  name: demo-web
+  namespace: demo-project-realestate
+  labels:
+    app: demo-web
+    app.kubernetes.io/component: demo-web
+    app.kubernetes.io/instance: demo-web
+    app.kubernetes.io/name: demo-web
+    app.openshift.io/runtime-namespace: demo-project-realestate
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-web
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: demo-web
+        deploymentconfig: demo-web
+    spec:
+      containers:
+        - name: demo-web
+          image: >-
+            quay.io/michelle_jiang_ibm/demo-web-v2
+          ports:
+            - containerPort: 80
+              protocol: TCP
+            - containerPort: 9000
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

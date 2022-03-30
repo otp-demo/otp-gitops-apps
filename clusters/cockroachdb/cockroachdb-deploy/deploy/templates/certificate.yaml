@@ -24,7 +24,7 @@ spec:
   - cockroachdb-{{ . }}.cockroachdb.{{ $namespace }}.svc
   - cockroachdb-{{ . }}.cockroachdb
 {{- end }}
-  duration: 168h
+  duration: 5000h
   renewBefore: 1h
   issuerRef:
     name: cockroach-issuer

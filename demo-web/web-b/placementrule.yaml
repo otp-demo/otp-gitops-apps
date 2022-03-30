@@ -3,10 +3,10 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   labels:
-    app: mobile-simulator
-  name: mobile-simulator-placement-1
-  namespace: bank-infra
+    app: demo-web-b
+  name: demo-web-b
+  namespace: telstra-customer-b
 spec:
   clusterSelector:
     matchLabels:
-      'name': 'multicloud-cluster-set'
+      'demo': 'telstra'

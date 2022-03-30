@@ -2,14 +2,12 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-# global_base_domain: mutihybridcloudkitchen.com
 
 clusterNames:
   - aws0
   - aws1
   - aws2
 
-# infrastructure: aws
 
 cockroachdb:
   statefulset:

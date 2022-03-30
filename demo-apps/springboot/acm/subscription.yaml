@@ -11,7 +11,7 @@ metadata:
   name: spring-boot-example-subscription-1
   namespace: demo
 spec:
-  channel: demo/spring-boot-example
+  channel: telstra-customer-a/spring-boot-example
   placement:
     placementRef:
       kind: PlacementRule

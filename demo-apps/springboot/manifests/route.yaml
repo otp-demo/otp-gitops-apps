@@ -1,0 +1,20 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/host.generated: "true"
+  labels:
+    app: spring-boot-example 
+    app.kubernetes.io/component: spring-boot-example
+    app.kubernetes.io/instance: spring-boot-example
+    app.kubernetes.io/name: spring-boot-example
+  name: spring-boot-example
+  namespace: telstra-customer-a
+spec:
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: spring-boot-example
+    weight: 100
+  wildcardPolicy: None

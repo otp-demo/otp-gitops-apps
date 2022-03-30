@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - service.yaml
+  - route.yaml
 namespace: telstra-customer-a
 
 #use the following to update the image

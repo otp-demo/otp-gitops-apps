@@ -30,7 +30,7 @@ spec:
       containers:
         - name: demo-web
           image: >-
-            quay.io/michelle_jiang_ibm/demo-web
+            quay.io/michelle_jiang_ibm/demo-web-v2
           ports:
             - containerPort: 80
               protocol: TCP

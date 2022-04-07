@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tpn-operator-pod
+  labels:
+    purpose: "operator"
+spec:
+  containers:
+  - name: tpn-operator
+    image: quay.io/yewande_toriola_ibm/tpn_operator
+    ports:
+    - containerPort: 8080

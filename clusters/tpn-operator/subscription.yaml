@@ -4,15 +4,15 @@ kind: Subscription
 metadata:
   annotations:
     apps.open-cluster-management.io/git-branch: master
-    apps.open-cluster-management.io/git-path: demo-apps/springboot/manifests
+    apps.open-cluster-management.io/git-path: clusters/tpn-operator/tpn
     apps.open-cluster-management.io/reconcile-option: merge
   labels:
-    app: spring-boot-example
-  name: spring-boot-example-subscription-1
-  namespace: demo
+    app: tpn
+  name: tpn-subscription
+  namespace: default
 spec:
-  channel: telstra-customer-a/spring-boot-example
+  channel: tpn-channel
   placement:
     placementRef:
       kind: PlacementRule
-      name: spring-boot-example-placement-1
+      name: tpn-placement-rule

@@ -1,6 +1,7 @@
 resources:
 - channel.yaml
 - placementrule.yaml
-- namespace.yaml
 - subscription.yaml
 - application.yaml
+
+namespace: telstra-customer-a

@@ -1,6 +1,4 @@
 resources:
-- rbac.yaml
-- hpa.yaml
 - channel.yaml
 - placementrule.yaml
 - namespace.yaml

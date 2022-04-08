@@ -1,0 +1,28 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: demo-db
+  labels:
+    app: demo-db
+    app.kubernetes.io/component: demo-db
+    app.kubernetes.io/instance: demo-db
+    app.kubernetes.io/name: demo-db
+spec:
+  ports:
+    - name: 3306-tcp
+      protocol: TCP
+      port: 3306
+      targetPort: 3306
+    - name: 33060-tcp
+      protocol: TCP
+      port: 33060
+      targetPort: 33060
+  selector:
+    app: demo-db
+    deploymentconfig: demo-db
+  type: ClusterIP
+  sessionAffinity: None
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+

@@ -3,13 +3,11 @@ apiVersion: apps/v1
 metadata:
   annotations:
   name: demo-web
-  namespace: telstra-customer-a-demo
   labels:
     app: demo-web
     app.kubernetes.io/component: demo-web
     app.kubernetes.io/instance: demo-web
     app.kubernetes.io/name: demo-web
-    app.openshift.io/runtime-namespace: telstra-customer-a-demo
 spec:
   replicas: 3
   strategy:

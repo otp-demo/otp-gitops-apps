@@ -1,0 +1,29 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: demo-web
+  namespace: demo-project-realestate
+  labels:
+    app: demo-web
+    app.kubernetes.io/component: demo-web
+    app.kubernetes.io/instance: demo-web
+    app.kubernetes.io/name: demo-web
+spec:
+  ports:
+    - name: 80-tcp
+      protocol: TCP
+      port: 80
+      targetPort: 80
+    - name: 9000-tcp
+      protocol: TCP
+      port: 9000
+      targetPort: 9000
+  selector:
+    app: demo-web
+    deploymentconfig: demo-web
+  type: ClusterIP
+  sessionAffinity: None
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+

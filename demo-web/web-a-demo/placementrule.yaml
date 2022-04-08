@@ -1,0 +1,12 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  labels:
+    app: demo-web-a
+  name: demo-web-a
+  namespace: telstra-customer-a-demo
+spec:
+  clusterSelector:
+    matchLabels:
+      'demo': 'telstra'

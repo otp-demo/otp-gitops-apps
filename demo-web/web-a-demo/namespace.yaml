@@ -2,4 +2,4 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: telstra-customer-a-demo-demo
+  name: telstra-customer-a-demo

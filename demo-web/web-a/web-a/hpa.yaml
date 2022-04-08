@@ -4,7 +4,7 @@ items:
   kind: HorizontalPodAutoscaler
   metadata:
     name: demo-web
-    namespace: telstra-customer-a-demo
+    namespace: telstra-customer-a
   spec:
     maxReplicas: 3
     minReplicas: 1

@@ -11,7 +11,7 @@ metadata:
     app.kubernetes.io/name: demo-web
     app.openshift.io/runtime-namespace: telstra-customer-a-demo
 spec:
-  replicas: 3
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:

@@ -9,4 +9,4 @@ metadata:
 spec:
   clusterSelector:
     matchLabels:
-      'demo': 'telstra'
+      'demo-v1': 'telstra'

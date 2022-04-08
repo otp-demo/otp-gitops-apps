@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/instance: demo-web
     app.kubernetes.io/name: demo-web
 spec:
-  replicas: 3
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:

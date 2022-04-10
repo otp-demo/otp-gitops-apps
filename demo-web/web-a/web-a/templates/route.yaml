@@ -3,6 +3,8 @@ kind: Route
 metadata:
   annotations:
     openshift.io/host.generated: "true"
+    app.kubernetes.io/managed-by: Helm
+    meta.helm.sh/release-namespace: telstra-customer-a
   labels:
     app: demo-web
     app.kubernetes.io/component: demo-web

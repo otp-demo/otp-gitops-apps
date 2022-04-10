@@ -3,6 +3,9 @@ kind: RoleBinding
 metadata:
   name: system:openshift:scc:anyuid
   namespace: telstra-customer-a
+  annotations:
+    app.kubernetes.io/managed-by: Helm
+    meta.helm.sh/release-namespace: telstra-customer-a
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -11,30 +14,30 @@ subjects:
 - kind: ServiceAccount
   name: default
   namespace: telstra-customer-a
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: hpa
-  namespace: telstra-customer-a-demo
-rules:
-  - apiGroups:
-      - autoscaling
-    resources:
-      - horizontalpodautoscalers
-    verbs:
-      - "*"
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: hpa
-  namespace: telstra-customer-a-demo
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: hpa
-subjects:
-  - kind: ServiceAccount
-    name: openshift-gitops-cntk-argocd-application-controller
-    namespace: openshift-gitops
+# ---
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: Role
+# metadata:
+#   name: hpa
+#   namespace: telstra-customer-a-demo
+# rules:
+#   - apiGroups:
+#       - autoscaling
+#     resources:
+#       - horizontalpodautoscalers
+#     verbs:
+#       - "*"
+# ---
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: RoleBinding
+# metadata:
+#   name: hpa
+#   namespace: telstra-customer-a-demo
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: Role
+#   name: hpa
+# subjects:
+#   - kind: ServiceAccount
+#     name: openshift-gitops-cntk-argocd-application-controller
+#     namespace: openshift-gitops

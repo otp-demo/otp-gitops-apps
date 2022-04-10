@@ -3,6 +3,9 @@ apiVersion: v1
 metadata:
   name: demo-web
   namespace: demo-project-realestate
+  annotations:
+    app.kubernetes.io/managed-by: Helm
+    meta.helm.sh/release-namespace: telstra-customer-a
   labels:
     app: demo-web
     app.kubernetes.io/component: demo-web

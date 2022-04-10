@@ -5,13 +5,13 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     meta.helm.sh/release-namespace: telstra-customer-a
   name: demo-db
-  namespace: demo-project-realestate
+  namespace: telstra-customer-a
   labels:
     app: demo-db
     app.kubernetes.io/component: demo-db
     app.kubernetes.io/instance: demo-db
     app.kubernetes.io/name: demo-db
-    app.openshift.io/runtime-namespace: demo-project-realestate
+    app.openshift.io/runtime-namespace: telstra-customer-a
 spec:
   replicas: {{ .Values.db.replicas }}
   selector:

@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     meta.helm.sh/release-namespace: telstra-customer-a
   name: demo-db
-  namespace: demo-project-realestate
+  namespace: telstra-customer-a
   labels:
     app: demo-db
     app.kubernetes.io/component: demo-db

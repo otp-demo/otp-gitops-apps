@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: demo-web
-  namespace: demo-project-realestate
+  namespace: telstra-customer-a
   annotations:
     app.kubernetes.io/managed-by: Helm
     meta.helm.sh/release-namespace: telstra-customer-a

@@ -11,7 +11,7 @@ metadata:
     app.kubernetes.io/name: demo-db
     app.openshift.io/runtime-namespace: demo-project-realestate
 spec:
-  replicas: 1
+  replicas: {{ .Values.db.replicas }}
   selector:
     matchLabels:
       app: demo-db
@@ -27,7 +27,7 @@ spec:
       containers:
         - name: demo-db
           image: >-
-            quay.io/michelle_jiang_ibm/demo-db
+            {{ .Values.db.image }}
           ports:
             - containerPort: 3306
               protocol: TCP

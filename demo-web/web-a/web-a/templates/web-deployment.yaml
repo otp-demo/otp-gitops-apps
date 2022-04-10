@@ -11,7 +11,7 @@ metadata:
     app.kubernetes.io/name: demo-web
     app.openshift.io/runtime-namespace: telstra-customer-a-demo
 spec:
-  replicas: 1
+  replicas: {{ .Values.web.replicas }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -30,7 +30,7 @@ spec:
       containers:
         - name: demo-web
           image: >-
-            quay.io/michelle_jiang_ibm/demo-web
+            {{ .Values.web.image }}
           ports:
             - containerPort: 80
               protocol: TCP

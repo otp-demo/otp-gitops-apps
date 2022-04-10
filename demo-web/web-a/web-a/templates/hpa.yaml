@@ -1,3 +1,4 @@
+{{- if .Values.autoscaling.enabled }}
 apiVersion: v1
 items:
 - apiVersion: autoscaling/v1
@@ -6,14 +7,14 @@ items:
     name: demo-web
     namespace: telstra-customer-a
   spec:
-    maxReplicas: 3
-    minReplicas: 1
+    maxReplicas: {{ .Values.autoscaling.maxReplicas }}
+    minReplicas: {{ .Values.autoscaling.minReplicas }}
     scaleTargetRef:
       apiVersion: apps/v1
       kind: Deployment
       name: demo-web
-    targetCPUUtilizationPercentage: 20
-kind: List
+    targetCPUUtilizationPercentage: {{ .Values.autoscaling.targetCPUUtilizationPercentage }}
 metadata:
   resourceVersion: ""
   selfLink: ""
+{{- end }}

@@ -1,0 +1,21 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+service:
+  type: ClusterIP
+  port: 80
+
+web:
+  image: quay.io/michelle_jiang_ibm/demo-web
+  replicas: 1
+
+
+db:
+  image: quay.io/michelle_jiang_ibm/demo-db
+  replicas: 1
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 20
+  # targetMemoryUtilizationPercentage: 80

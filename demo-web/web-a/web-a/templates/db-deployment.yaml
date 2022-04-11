@@ -3,15 +3,15 @@ apiVersion: apps/v1
 metadata:
   annotations:
     app.kubernetes.io/managed-by: Helm
-    meta.helm.sh/release-namespace: telstra-customer-a
+    meta.helm.sh/release-namespace: {{ .Values.namespace }}
   name: demo-db
-  namespace: telstra-customer-a
+  namespace: {{ .Values.namespace }}
   labels:
     app: demo-db
     app.kubernetes.io/component: demo-db
     app.kubernetes.io/instance: demo-db
     app.kubernetes.io/name: demo-db
-    app.openshift.io/runtime-namespace: telstra-customer-a
+    app.openshift.io/runtime-namespace: {{ .Values.namespace }}
 spec:
   replicas: {{ .Values.db.replicas }}
   selector:

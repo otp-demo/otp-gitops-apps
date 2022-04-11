@@ -3,9 +3,9 @@ apiVersion: v1
 metadata:
   annotations:
     app.kubernetes.io/managed-by: Helm
-    meta.helm.sh/release-namespace: telstra-customer-a
+    meta.helm.sh/release-namespace: {{ .Values.namespace }}
   name: demo-db
-  namespace: telstra-customer-a
+  namespace: {{ .Values.namespace }}
   labels:
     app: demo-db
     app.kubernetes.io/component: demo-db

@@ -2,10 +2,10 @@ kind: Service
 apiVersion: v1
 metadata:
   name: demo-web
-  namespace: telstra-customer-a
+  namespace: {{ .Values.namespace }}
   annotations:
     app.kubernetes.io/managed-by: Helm
-    meta.helm.sh/release-namespace: telstra-customer-a
+    meta.helm.sh/release-namespace: {{ .Values.namespace }}
   labels:
     app: demo-web
     app.kubernetes.io/component: demo-web

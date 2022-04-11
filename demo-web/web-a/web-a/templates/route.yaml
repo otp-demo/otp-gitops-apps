@@ -4,14 +4,14 @@ metadata:
   annotations:
     openshift.io/host.generated: "true"
     app.kubernetes.io/managed-by: Helm
-    meta.helm.sh/release-namespace: telstra-customer-a
+    meta.helm.sh/release-namespace: {{ .Values.namespace }}
   labels:
     app: demo-web
     app.kubernetes.io/component: demo-web
     app.kubernetes.io/instance: demo-web
     app.kubernetes.io/name: demo-web
   name: demo-web-a
-  namespace: telstra-customer-a
+  namespace: {{ .Values.namespace }}
 spec:
   port:
     targetPort: 80-tcp

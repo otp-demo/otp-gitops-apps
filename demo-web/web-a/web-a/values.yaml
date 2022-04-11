@@ -13,6 +13,8 @@ db:
   image: quay.io/michelle_jiang_ibm/demo-db
   replicas: 1
 
+namespace: telstra-demo
+
 autoscaling:
   enabled: false
   minReplicas: 1

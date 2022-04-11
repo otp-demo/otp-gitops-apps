@@ -13,7 +13,7 @@ db:
   image: quay.io/michelle_jiang_ibm/demo-db
   replicas: 1
 
-namespace: telstra-customer-a
+namespace: telstra-demo-a
 
 autoscaling:
   enabled: false
